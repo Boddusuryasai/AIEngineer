@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #todoList { margin-top: 20px; }
+        .todoItem { display: flex; justify-content: space-between; margin: 5px 0; }
+        .todoItem button { margin-left: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Todo App</h1>
+    <input type="text" id="todoInput" placeholder="Add a new todo">
+    <button id="addTodo">Add Todo</button>
+    <div id="todoList"></div>
+
+    <script>
+        const todoInput = document.getElementById('todoInput');
+        const addTodoButton = document.getElementById('addTodo');
+        const todoList = document.getElementById('todoList');
+
+        addTodoButton.addEventListener('click', () => {
+            const todoText = todoInput.value;
+            if (todoText) {
+                const todoItem = document.createElement('div');
+                todoItem.className = 'todoItem';
+                todoItem.innerHTML = `
+                    <span>${todoText}</span>
+                    <button class='deleteTodo'>Delete</button>
+                `;
+
+                todoList.appendChild(todoItem);
+                todoInput.value = '';
+
+                todoItem.querySelector('.deleteTodo').addEventListener('click', () => {
+                    todoList.removeChild(todoItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
